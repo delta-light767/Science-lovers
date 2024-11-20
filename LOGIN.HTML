@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <style>
+        /* Global styles */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 5px;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .form-container {
+            display: none;
+            padding: 20px;
+            margin-top: 20px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: calc(100% - 16px);
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .toggle-password {
+            cursor: pointer;
+            color: #007bff;
+            font-size: 14px;
+            margin-top: 5px;
+            display: block;
+        }
+
+        .toggle-password:hover {
+            text-decoration: underline;
+        }
+
+        #main-page {
+            display: none;
+        }
+
+        /* Table and data view styles */
+        .data-container {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        #data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #data-table th,
+        #data-table td {
+            padding: 12px 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        #data-table th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        #data-table td {
+            background-color: #f2f2f2;
+        }
+
+        .delete-btn {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .delete-btn:hover {
+            background-color: #d32f2f;
+        }
+
+        .delete-btn:focus {
+            outline: none;
+        }
+
+        .clear-form-btn {
+            background-color: #f0ad4e;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .clear-form-btn:hover {
+            background-color: #ec971f;
+        }
+
+        .clear-form-btn:focus {
+            outline: none;
+        }
+
+        .show-data-btn {
+            background-color: #5bc0de;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .show-data-btn:hover {
+            background-color: #31b0d5;
+        }
+
+        .show-data-btn:focus {
+            outline: none;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the Application</h1>
+        <button id="login-options-btn">Login Options</button>
+
+        <div id="login-options" class="form-container">
+            <button id="existing-user-btn">Already a user</button>
+            <button id="create-account-btn">Create an account</button>
+        </div>
+
+        <div id="login-form" class="form-container">
+            <div class="form-group">
+                <label for="login-username">Username</label>
+                <input type="text" id="login-username" required>
+            </div>
+            <div class="form-group">
+                <label for="login-password">Password</label>
+                <input type="password" id="login-password" required>
+            </div>
+            <button id="login-btn">Login</button>
+            <button id="login-back-btn">Back</button>
+        </div>
+
+        <div id="register-form" class="form-container">
+            <div class="form-group">
+                <label for="register-name">Name</label>
+                <input type="text" id="register-name" required>
+            </div>
+            <div class="form-group">
+                <label for="register-email">Email</label>
+                <input type="email" id="register-email" required>
+            </div>
+            <div class="form-group">
+                <label for="register-mobile">Mobile Number</label>
+                <input type="text" id="register-mobile" required>
+            </div>
+            <div class="form-group">
+                <label for="register-password">Password</label>
+                <input type="password" id="register-password" required>
+                <span class="toggle-password" id="toggle-password">Show</span>
+            </div>
+            <div class="form-group" id="otp-group" style="display:none;">
+                <label for="register-otp">OTP</label>
+                <input type="text" id="register-otp" required>
+            </div>
+            <button id="send-otp-btn">Send OTP</button>
+            <button id="register-btn" style="display:none;">Submit</button>
+            <button id="clear-form-btn" class="clear-form-btn">Clear Form</button>
+            <button id="register-back-btn">Back</button>
+        </div>
+
+        <div id="main-page" class="form-container">
+            <h2 id="welcome-user"></h2>
+            <p>Thank you for coming here!</p>
+        </div>
+
+        <div id="data-view-form" class="form-container">
+            <h2>Verify Password to View Data</h2>
+            <div class="form-group">
+                <label for="view-password">Password</label>
+                <input type="password" id="view-password" required>
+            </div>
+            <button id="view-password-btn">Verify</button>
+            <button id="data-back-btn">Back</button>
+        </div>
+
+        <div class="data-container" id="data-table-container" style="display:none;">
+            <h2>Registered Data</h2>
+            <table id="data-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Mobile Number</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Table rows will be dynamically added here -->
+                </tbody>
+            </table>
+            <button id="view-data-btn" class="show-data-btn">Show Registered Data</button>
+        </div>
+    </div>
+
+    <script>
+        const loginOptionsBtn = document.getElementById('login-options-btn');
+        const loginOptions = document.getElementById('login-options');
+        const existingUserBtn = document.getElementById('existing-user-btn');
+        const createAccountBtn = document.getElementById('create-account-btn');
+        const loginForm = document.getElementById('login-form');
+        const registerForm = document.getElementById('register-form');
+        const mainPage = document.getElementById('main-page');
+        const togglePasswordBtn = document.getElementById('toggle-password');
+        const sendOtpBtn = document.getElementById('send-otp-btn');
+        const registerBtn = document.getElementById('register-btn');
+        const otpGroup = document.getElementById('otp-group');
+        const viewDataBtn = document.getElementById('view-data-btn');
+        const viewPasswordBtn = document.getElementById('view-password-btn');
+        const dataViewForm = document.getElementById('data-view-form');
+        const dataBackBtn = document.getElementById('data-back-btn');
+        const dataTableContainer = document.getElementById('data-table-container');
+        const clearFormBtn = document.getElementById('clear-form-btn');
+
+        const userData = JSON.parse(localStorage.getItem('userData')) || [];
+        let generatedOtp = null;
+
+        loginOptionsBtn.addEventListener('click', () => {
+            loginOptions.style.display = 'block';
+            loginOptionsBtn.style.display = 'none';
+        });
+
+        existingUserBtn.addEventListener('click', () => {
+            loginForm.style.display = 'block';
+            loginOptions.style.display = 'none';
+        });
+
+        createAccountBtn.addEventListener('click', () => {
+            registerForm.style.display = 'block';
+            loginOptions.style.display = 'none';
+        });
+
+        clearFormBtn.addEventListener('click', () => {
+            document.getElementById('register-name').value = '';
+            document.getElementById('register-email').value = '';
+            document.getElementById('register-mobile').value = '';
+            document.getElementById('register-password').value = '';
+            document.getElementById('register-otp').value = '';
+            otpGroup.style.display = 'none';
+            sendOtpBtn.style.display = 'inline-block';
+            registerBtn.style.display = 'none';
+        });
+
+        document.getElementById('login-back-btn').addEventListener('click', () => {
+            loginForm.style.display = 'none';
+            loginOptions.style.display = 'block';
+        });
+
+        document.getElementById('register-back-btn').addEventListener('click', () => {
+            registerForm.style.display = 'none';
+            loginOptions.style.display = 'block';
+        });
+
+        document.getElementById('login-btn').addEventListener('click', () => {
+            const username = document.getElementById('login-username').value;
+            const password = document.getElementById('login-password').value;
+
+            const user = userData.find(user => user.Name === username && user.Password === password);
+            if (user) {
+                document.getElementById('welcome-user').textContent = `Welcome, ${username}!`;
+                mainPage.style.display = 'block';
+                loginForm.style.display = 'none';
+            } else {
+                alert('Username or password incorrect!');
+            }
+        });
+
+        sendOtpBtn.addEventListener('click', () => {
+            const mobile = document.getElementById('register-mobile').value;
+            if (!mobile) {
+                alert('Please enter a mobile number to receive OTP!');
+                return;
+            }
+
+            generatedOtp = Math.floor(1000 + Math.random() * 9000).toString();
+            // Simulate sending OTP via SMS API
+            alert(`OTP sent to ${mobile}: ${generatedOtp}`);
+
+            otpGroup.style.display = 'block';
+            sendOtpBtn.style.display = 'none';
+            registerBtn.style.display = 'inline-block';
+        });
+
+        registerBtn.addEventListener('click', () => {
+            const name = document.getElementById('register-name').value;
+            const email = document.getElementById('register-email').value;
+            const mobile = document.getElementById('register-mobile').value;
+            const password = document.getElementById('register-password').value;
+            const otp = document.getElementById('register-otp').value;
+
+            if (!name || !email || !mobile || !password || !otp) {
+                alert('All fields are required!');
+                return;
+            }
+
+            if (userData.some(user => user.Name === name)) {
+                alert('Username already used!');
+                return;
+            }
+
+            if (otp !== generatedOtp) {
+                alert('Invalid OTP!');
+                return;
+            }
+
+            userData.push({ Name: name, Email: email, Mobile: mobile, Password: password });
+            localStorage.setItem('userData', JSON.stringify(userData));
+
+            alert('Account created successfully!');
+            registerForm.style.display = 'none';
+            loginOptions.style.display = 'block';
+        });
+
+        togglePasswordBtn.addEventListener('click', () => {
+            const passwordInput = document.getElementById('register-password');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                togglePasswordBtn.textContent = 'Hide';
+            } else {
+                passwordInput.type = 'password';
+                togglePasswordBtn.textContent = 'Show';
+            }
+        });
+
+        viewDataBtn.addEventListener('click', () => {
+            dataViewForm.style.display = 'block';
+        });
+
+        viewPasswordBtn.addEventListener('click', () => {
+            const password = document.getElementById('view-password').value;
+
+            if (!password) {
+                alert('Please enter the password to view data.');
+                return;
+            }
+
+            // Simulate server-side verification
+            // Replace with actual server-side verification if required
+            const response = { message: 'Password verified successfully', data: userData };
+            if (response.message === 'Password verified successfully') {
+                displayUserData(response.data);
+            } else {
+                alert('Invalid password.');
+            }
+        });
+
+        dataBackBtn.addEventListener('click', () => {
+            dataViewForm.style.display = 'none';
+        });
+
+        function displayUserData(data) {
+            const tableBody = document.querySelector('#data-table tbody');
+            tableBody.innerHTML = '';
+
+            data.forEach(user => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${user.Name}</td>
+                    <td>${user.Email}</td>
+                    <td>${user.Mobile}</td>
+                    <td><button class="delete-btn" data-name="${user.Name}">Delete</button></td>
+                `;
+                tableBody.appendChild(row);
+            });
+
+            dataTableContainer.style.display = 'block';
+
+            // Add event listener for delete buttons
+            const deleteButtons = document.querySelectorAll('.delete-btn');
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const userName = button.getAttribute('data-name');
+                    const confirmDelete = confirm(`Are you sure you want to delete ${userName}'s data?`);
+                    if (confirmDelete) {
+                        deleteUserData(userName);
+                    }
+                });
+            });
+        }
+
+        function deleteUserData(userName) {
+            const index = userData.findIndex(user => user.Name === userName);
+            if (index !== -1) {
+                userData.splice(index, 1);
+                localStorage.setItem('userData', JSON.stringify(userData));
+                displayUserData(userData); // Refresh table after deletion
+                alert(`${userName}'s data deleted successfully.`);
+            }
+        }
+    </script>
+</body>
+</html>
